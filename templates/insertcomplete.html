@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Completing Data Insert</title>
+</head>
+<body>
+{{ msg }}<br>
+The latest entry in the database is: <br>
+<table>
+    <tr>
+    {% for row in result %}
+        <td>{{ row }}</td>
+        {% endfor %}
+    </tr>
+</table>
+
+<a href='/'>back to home page</a>
+</body>
+</html>

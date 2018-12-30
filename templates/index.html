@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Karori Mountain Biking Club</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="Description" lang="en" content="ADD SITE DESCRIPTION">
+<meta name="author" content="ADD AUTHOR INFORMATION">
+<meta name="robots" content="index, follow">
+
+
+<!-- Override CSS file - add your own CSS rules -->
+		<link rel="stylesheet" href="/static/css/myStyles.css">
+	</head>
+	<body>
+		<div class="header">
+			<!--<div class="headercontainer">-->
+                <img src="images/biking7.jpg" alt="Mountain bikers in snow" class="center">
+                <!--<h1 class="title">Karori Mountain Biking est. 2015</h1>-->
+			<!--</div>-->
+        </div>
+<div class="nav-bar">
+			<div class="navcontainer">
+<ul class="nav">
+					<li><a href="#T1">vodafone event</a></li>
+					<li><a href="#T2">talk from josie wilcox</a></li>
+					<li><a href="#T3">upcoming competitions</a></li>
+                    <li><a href="#T4">competition results</a></li>
+                    <li><a href="#T5">young stars</a></li>
+				</ul>
+			</div>
+</div>
+		<div class="content">
+			<div class="container">
+                <h1>Karori Mountain Biking Club</h1>
+                <h2>First Quarter Newsletter 2018</h2>
+				<p>Welcome to our first newsletter of the year. Four months have passed since our end of year Christmas barbecue and rider demonstration. Thanks to everyone who has helped and given up their valuable time to help work on tracks around Wellington. <br><br>The mid-year ride this year is planned for the last weekend in July and is a two-day event at Tarawera Forest in the Bay of Plenty. More details will be published in next month’s newsletter as we finalise accommodation and transport arrangements. <br><br>Lastly, remember committee meetings are the first Tuesday of the month at 7.00 pm in the Club Rooms and all members are welcome.<br><br>
+                Sarah Scott<br>
+                President </p>
+
+
+
+                <h3 id="T1">Riders with an "021" phone number: <br>Vodafone would like to invite all riders on their plans to a sponsored event in Rotorua</h3>
+                <table>
+                {% for row in vod %}
+                    <tr><td>{{ row[0] }}</td><td> {{ row[1] }} </td> <td> {{ row[2] }} </td></tr>
+                {% endfor %}
+                    </table>
+
+
+                <br><br>
+
+                <h3 id="T2">Female riders who live in Karori: <br>An invitation to attend a talk from Josie Wilcox at Karori Park</h3>
+                <table>
+                {% for row in f_k %}
+                    <tr><td>{{ row[0] }}</td><td> {{ row[1] }} </td></tr>
+
+                {% endfor %}
+                    </table>
+
+
+
+                <br><br>
+
+                <h3 id="T3">Upcoming competitions in 2018 as of:<br>21/02</h3>
+                                <table>
+                {% for row in event %}
+                    <tr><td>{{ row[0] }}</td><td> {{ row[1] }} </td></tr>
+
+                {% endfor %}
+                    </table>
+
+
+
+                <br><br>
+
+                <h3 id="T4">Previous competition results</h3>
+                <table>
+                {% for row in results %}
+                    <tr><td>{{ row[0] }}</td><td> {{ row[1] }} </td> <td>{{ row[2] }}</td><td> {{ row[3] }} </td> <td> {{ row[4] }} </td> <td> {{ row[5] }} </td> </tr>
+
+                {% endfor %}
+                    </table>
+
+
+
+                <br><br>
+
+                <h3 id="T5">Get to know our under 18 riders!</h3>
+                                <table>
+                {% for row in underage %}
+                                    <tr><td>{{ row[0] }}</td><td> {{ row[1] }} </td> <td>{{ row[2] }}</td><td> {{ row[3] }} </td></tr>
+                                    <tr><td colspan="4"> {{ row[4] }} </td></tr>
+
+                {% endfor %}
+                    </table>
+
+
+
+			</div>
+		</div>
+		<div class="footer">
+			<div class="container">
+				&copy; Copyright 2018 Karori Mountain Biking Club
+			</div>
+		</div>
+	</body>
+</html>

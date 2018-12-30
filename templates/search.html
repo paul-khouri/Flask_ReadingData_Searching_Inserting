@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+</head>
+<body>
+<form action='/search' method = 'POST'>
+<input type="text" name="mysearch">
+    <input type="submit" name="Submit"/>
+    </form>
+<table>
+    {% for row in result %}
+    <tr> {% for x in row %}
+        <td>{{ x }}</td>
+        {% endfor %}
+        </tr>
+    {% endfor %}
+    </table>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert Data </title>
+
+    <style>
+      table, td {
+      border: 1px solid #d4d4d4;
+      border-collapse: collapse;
+      vertical-align: top;
+    }
+    table tr td:first-child{
+        text-align: right;
+    }
+    table{
+        margin:auto;
+    }
+
+    </style>
+</head>
+<body>
+<form action="/insertcomplete" method='POST'>
+    <table>
+        <tr><td>First Name</td><td><input type="text" value="Jane" name="fn"></td></tr>
+        <tr><td>Last Name</td><td><input type="text" value="Doe" name="ln"></td></tr>
+        <tr><td>Address</td><td><input type="text" value="21 Smith Street" name="ad"></td></tr>
+        <tr><td>Suburb</td><td><input type="text" value="Karori" name="sub"> </td></tr>
+        <tr><td>Postcode</td><td><input type="text" size="4" value="0000" name="pc"> </td></tr>
+        <tr><td>Phone</td><td><input type="tel" value="021 667 8934" name="pho"></td></tr>
+        <tr><td>Email</td><td><input type="email" value="janedoe@hotmail.com" name="em"> </td> </tr>
+        <tr><td>Birthdate </td><td> <input type="date" name="bday" value="12/04/2000"> </td></tr>
+        <tr><td>Gender </td><td>   <input type="radio" name="gender" value="male"> Male<br>
+                                    <input type="radio" name="gender" value="female"> Female<br>
+                                    <input type="radio" name="gender" value="other" checked> Other  </td></tr>
+        <tr><td>Bio</td><td> <textarea rows="2" cols="30" maxlength="500" name="bio">Bio goes here</textarea>  </td></tr>
+        <tr>
+                <td>  </td>
+                <td style="text-align: right;"><input type="reset"> <input type="submit" value="Submit"></td>
+            </tr>
+
+    </table>
+
+</form>
+
+</body>
+</html>
