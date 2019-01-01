@@ -1,27 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Insert Data </title>
+{% extends "template.html" %}
 
-    <style>
-      table, td {
-      border: 1px solid #d4d4d4;
-      border-collapse: collapse;
-      vertical-align: top;
-    }
-    table tr td:first-child{
-        text-align: right;
-    }
-    table{
-        margin:auto;
-    }
 
-    </style>
-</head>
-<body>
+{% block title %}
+Karori Mountainbiking Club
+{% endblock %}
+
+{% block content %}
+<div class="container" style="background-color:#eeeeee;">
+
 <form action="/insertcomplete" method='POST'>
-    <table>
+     <table style="margin:auto;">
         <tr><td>First Name</td><td><input type="text" value="Jane" name="fn"></td></tr>
         <tr><td>Last Name</td><td><input type="text" value="Doe" name="ln"></td></tr>
         <tr><td>Address</td><td><input type="text" value="21 Smith Street" name="ad"></td></tr>
@@ -39,9 +27,9 @@
                 <td style="text-align: right;"><input type="reset"> <input type="submit" value="Submit"></td>
             </tr>
 
-    </table>
 
+    </table>
 </form>
 
-</body>
-</html>
+    </div>
+{% endblock %}

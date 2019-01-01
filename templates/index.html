@@ -1,36 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Karori Mountain Biking Club</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="Description" lang="en" content="ADD SITE DESCRIPTION">
-<meta name="author" content="ADD AUTHOR INFORMATION">
-<meta name="robots" content="index, follow">
+{% extends "template.html" %}
 
 
-<!-- Override CSS file - add your own CSS rules -->
-		<link rel="stylesheet" href="/static/css/myStyles.css">
-	</head>
-	<body>
-		<div class="header">
-			<!--<div class="headercontainer">-->
-                <img src="images/biking7.jpg" alt="Mountain bikers in snow" class="center">
-                <!--<h1 class="title">Karori Mountain Biking est. 2015</h1>-->
-			<!--</div>-->
-        </div>
-<div class="nav-bar">
-			<div class="navcontainer">
-<ul class="nav">
+{% block title %}
+Karori Mountainbiking Club
+{% endblock %}
+
+{% block content %}
+<ul>
 					<li><a href="#T1">vodafone event</a></li>
 					<li><a href="#T2">talk from josie wilcox</a></li>
 					<li><a href="#T3">upcoming competitions</a></li>
                     <li><a href="#T4">competition results</a></li>
                     <li><a href="#T5">young stars</a></li>
 				</ul>
-			</div>
-</div>
+
 		<div class="content">
 			<div class="container">
                 <h1>Karori Mountain Biking Club</h1>
@@ -100,10 +83,5 @@
 
 			</div>
 		</div>
-		<div class="footer">
-			<div class="container">
-				&copy; Copyright 2018 Karori Mountain Biking Club
-			</div>
-		</div>
-	</body>
-</html>
+
+{% endblock %}

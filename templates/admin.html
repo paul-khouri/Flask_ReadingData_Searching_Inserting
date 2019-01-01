@@ -1,0 +1,36 @@
+{% extends "template.html" %}
+
+
+{% block title %}
+Karori Mountainbiking Club
+{% endblock %}
+
+{% block content %}
+<style>
+    .btn{
+    width:16em;
+    }
+</style>
+<div class="container">
+<table style="margin:auto;">
+    <tr>
+        <td>Search the Membership part of the database</td>
+        <td>
+        <form action="/search"> <input type="submit" value="Search" class="btn btn-primary"/> </form>
+        </td>
+    </tr>
+    <tr>
+        <td>Add a new Member</td>
+        <td>
+         <form action="/insert"> <input type="submit" value="Create new member" class="btn btn-primary" /> </form>
+        </td>
+    </tr>
+        <tr>
+        <td>Delete a member using their ID</td>
+        <td>
+         <form action="/delete"> <input type="submit" value="Delete a member" class="btn btn-primary" /> </form>
+        </td>
+    </tr>
+</table>
+    </div>
+{% endblock %}

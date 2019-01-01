@@ -1,21 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Search</title>
-</head>
-<body>
-<form action='/search' method = 'POST'>
+{% extends "template.html" %}
+
+
+{% block title %}
+Search Members
+{% endblock %}
+
+{% block content %}
+<div class="container" style="background-color:#aaaaaa; overflow:hidden;">
+
+<form style="float:right;" action='/search' method = 'POST'>
 <input type="text" name="mysearch">
-    <input type="submit" name="Submit"/>
+    <input type="submit" name="Submit" value="Search Database" class="btn btn-primary"/>
     </form>
+
+
 <table>
+    <tr><th>ID #</th><th>First Name</th><th>Second Name</th>
+        <th>Address</th><th>Suburb</th><th>Post Code</th>
+        <th>Phone</th><th>Email</th><th>DOB</th><th>Gender</th>
+    </tr>
     {% for row in result %}
-    <tr> {% for x in row %}
-        <td>{{ x }}</td>
+    <tr> {% for x in range(0,10) %}
+        <td>{{ row[x] }}</td>
         {% endfor %}
         </tr>
     {% endfor %}
     </table>
-</body>
-</html>
+
+    </div>
+{% endblock %}
+<!-- Or let Bootstrap automatically handle the layout -->
+
