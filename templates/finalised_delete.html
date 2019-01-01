@@ -1,0 +1,16 @@
+{% extends "template.html" %}
+
+
+{% block title %}
+Karori Mountainbiking Club
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    {{ msg | safe }} <br>
+    <div style="background-color:#aaaaaa; overflow:hidden;">
+ <form style="float:right;"  action="/admin"> <input type="submit" value="Back to Admin" class="btn btn-primary"/> </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "delete_id.html" %}
+
+{% block confirm %}
+<div class="container" >
+
+
+    <div style="background-color:#aaaaaa; overflow:hidden;">
+<form style="float:right;" action='/deleteconfirmed' method = 'POST'>
+    <input type="submit" name="delete" value="Confirm Delete" class="btn btn-primary"/>
+    </form>
+    </div>
+
+    </div>
+
+{% endblock %}
