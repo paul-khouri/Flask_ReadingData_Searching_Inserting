@@ -1,0 +1,25 @@
+{% extends "template.html" %}
+
+
+{% block title %}
+Delete Member using ID
+{% endblock %}
+
+{% block content %}
+<div class="container" >
+
+    <div style="background-color:#aaaaaa; overflow:hidden;">
+<form style="float:right;" action='/delete' method = 'POST'>
+<input type="text" name="my_delete_id">
+    <input type="submit" name="Submit" value="Enter Member to Delete" class="btn btn-primary"/>
+    </form>
+    </div>
+
+    <div>
+
+{% for x in result %}
+    {{x}}<br>
+    {% endfor %}
+    </div>
+    </div>
+    {% endblock %}

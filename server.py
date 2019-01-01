@@ -25,6 +25,39 @@ def db_insert(fn, ln, ad, sub, pc, pho, em, bday, gender, bio):
     return "Message"
 
 
+def db_search_id(id):
+    conn = sqlite3.connect('memberTable.sqlite')
+    cur = conn.cursor()
+    sql = 'select * from memberTable where memberID = {} '.format(id)
+    cur.execute(sql)
+    member = cur.fetchone()
+    if member is None:
+        member_message = "No member with this ID has been found"
+    else:
+        member_message= "The member {} {} has been found and can now be deleted".format(member[1], member[2])
+    sql = 'select * from results where memberID = {} '.format(id)
+    cur.execute(sql)
+    results = cur.fetchall()
+    if len(results) == 0:
+        results_message = "There are no competition entries to be deleted"
+    else:
+        results_message = "The are {} competition entries that will also be deleted ".format(len(results))
+    conn.close()
+    return member_message,results_message
+
+# delete given an ID
+def db_delete_id(id):
+    conn = sqlite3.connect('memberTable.sqlite')
+    cur = conn.cursor()
+    sql ="delete from memberTable where memberID = {}".format(id)
+    cur.execute(sql)
+    conn.commit()
+    sql ="delete from results where memberID = {}".format(id)
+    cur.execute(sql)
+    conn.commit()
+    conn.close()
+
+
 @app.route('/')
 def main_index():
     query_f_k = 'select memberTable.firstName, memberTable.lastName from memberTable where gender = "Female" and suburb = "Karori";'
@@ -47,38 +80,18 @@ def main_index():
     cur = conn.cursor()
     cur.execute(query_f_k)
     f_k = cur.fetchall()
-    for x in f_k:
-        for y in x:
-            print("{} ".format(y), end="")
-        print()
 
     cur.execute(query_vod)
     vod = cur.fetchall()
-    for x in vod:
-        for y in x:
-            print("{} ".format(y), end="")
-        print()
 
     cur.execute(query_event)
     event = cur.fetchall()
-    for x in event:
-        for y in x:
-            print("{} ".format(y), end="")
-        print()
 
     cur.execute(query_results)
     results = cur.fetchall()
-    for x in results:
-        for y in x:
-            print("{} ".format(y), end="")
-        print()
 
     cur.execute(query_underage)
     underage = cur.fetchall()
-    for x in underage:
-        for y in x:
-            print("{} ".format(y), end="")
-        print()
 
     conn.close()
 
@@ -122,6 +135,25 @@ def insert_complete():
     result = cur.fetchone()
     print(result)
     return render_template("insertcomplete.html", msg=msg, result=result)
+
+
+@app.route('/admin')
+def my_admin():
+    return render_template("admin.html")
+
+
+temp = None
+@app.route('/delete' , methods=['GET', 'POST'])
+def my_delete_id():
+    if request.method == 'GET':
+        return render_template("delete_id.html")
+    elif request.method == 'POST':
+        global temp
+        if temp is None:
+            s = request.form['my_delete_id']
+            result = db_search_id(s)
+            print(result)
+            return render_template("delete_id.html", result=result)
 
 
 if __name__ == '__main__':

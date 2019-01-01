@@ -1,13 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Completing Data Insert</title>
-</head>
-<body>
-{{ msg }}<br>
-The latest entry in the database is: <br>
-<table>
+{% extends "template.html" %}
+
+
+{% block title %}
+Karori Mountainbiking Club
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    {{ msg }} <br>
+    The latest entry in the database is:
+<table style="margin:auto;">
+
     <tr>
     {% for row in result %}
         <td>{{ row }}</td>
@@ -15,6 +19,6 @@ The latest entry in the database is: <br>
     </tr>
 </table>
 
-<a href='/'>back to home page</a>
-</body>
-</html>
+ <form action="/"> <input type="submit" value="Back to home" class="btn btn-primary"/> </form>
+    </div>
+{% endblock %}
