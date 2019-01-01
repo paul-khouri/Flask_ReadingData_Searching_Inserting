@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 import sqlite3
 app = Flask(__name__)
+app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 def db_Search(s):
     conn = sqlite3.connect('memberTable.sqlite')
@@ -32,7 +33,7 @@ def db_search_id(id):
     cur.execute(sql)
     member = cur.fetchone()
     if member is None:
-        member_message = "No member with this ID has been found"
+        return None
     else:
         member_message= "The member {} {} has been found and can now be deleted".format(member[1], member[2])
     sql = 'select * from results where memberID = {} '.format(id)
@@ -56,6 +57,7 @@ def db_delete_id(id):
     cur.execute(sql)
     conn.commit()
     conn.close()
+    return "The member with memberId {}, has been deleted, along <br> with any competition results".format(id)
 
 
 @app.route('/')
@@ -142,18 +144,30 @@ def my_admin():
     return render_template("admin.html")
 
 
-temp = None
+
 @app.route('/delete' , methods=['GET', 'POST'])
 def my_delete_id():
     if request.method == 'GET':
         return render_template("delete_id.html")
     elif request.method == 'POST':
-        global temp
-        if temp is None:
             s = request.form['my_delete_id']
+            session['idkey'] = s
             result = db_search_id(s)
-            print(result)
-            return render_template("delete_id.html", result=result)
+            if result is None:
+                result=("No member with this ID has been found",)
+                return render_template("delete_id.html", result=result)
+            else:
+                print("Have accessed confirm delete")
+                return render_template("confirm_delete.html",  result=result)
+
+
+
+@app.route('/deleteconfirmed', methods=['POST'])
+def delete_confirmed():
+    myvar = session.get('idkey', None)
+    message = db_delete_id(myvar)
+    return render_template("finalised_delete.html",  msg=message)
+
 
 
 if __name__ == '__main__':
