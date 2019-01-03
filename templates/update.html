@@ -1,0 +1,35 @@
+{% extends "template.html" %}
+
+
+{% block title %}
+Karori Mountainbiking Club
+{% endblock %}
+
+{% block content %}
+<div class="container" style="background-color:#eeeeee;">
+{% for message in form.firstname.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+          {% for message in form.email.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+<form action = "/update" method = "POST">
+
+<table style="margin:auto;">
+    <tr> <td>{{form.firstname.label}} </td><td> {{form.firstname}} </td></tr>
+    <tr> <td>{{form.lastname.label}} </td><td> {{form.lastname}} </td></tr>
+    <tr> <td>{{form.address.label}} </td><td> {{form.address}} </td></tr>
+    <tr> <td>{{form.suburb.label}}   </td><td>{{form.suburb}} </td></tr>
+    <tr> <td>{{form.postcode.label}}  </td><td> {{form.postcode}} </td></tr>
+    <tr> <td>{{form.phoneNumber.label}}  </td><td> {{form.phoneNumber}}</td></tr>
+    <tr> <td>{{form.email.label}}  </td><td> {{form.email}} </td></tr>
+    <tr> <td>{{form.birthdate.label}}  </td><td> {{form.birthdate}} </td></tr>
+    <tr> <td>{{form.gender.label}}  </td><td> {{form.gender}} </td></tr>
+    <tr><td>{{form.bio.label}} </td><td> {{form.bio}}</td></tr>
+    <tr> <td> </td><td style="text-align: right;"> {{form.submit}} </td></tr>
+    </table>
+</form>
+</div>
+{% endblock %}

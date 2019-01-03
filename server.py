@@ -1,7 +1,14 @@
 from flask import Flask, render_template, request, session
+from mainform import MainForm
 import sqlite3
+import datetime
 app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
+
+def string_to_date(s):
+    temp=s.split("-")
+    new_date = datetime.datetime(int(temp[0]), int(temp[1]), int(temp[2]))
+    return new_date
 
 def db_Search(s):
     conn = sqlite3.connect('memberTable.sqlite')
@@ -25,6 +32,29 @@ def db_insert(fn, ln, ad, sub, pc, pho, em, bday, gender, bio):
     conn.close()
     return "Message"
 
+
+def db_update(id, fn, ln, ad, sub, pc, pho, em, bday, gender, bio):
+    conn = sqlite3.connect('memberTable.sqlite')
+    cur = conn.cursor()
+    sql ='update memberTable set firstName = "{}", lastName =  "{}" , address="{}" , suburb="{}" , ' \
+         'postcode = "{}", phoneNumber = "{}" , email= "{}", birthDate = "{}" ,' \
+         'gender = "{}", bio = "{}" where memberID = "{}" '.format(fn, ln, ad, sub, pc, pho, em, bday, gender, bio,id)
+    cur.execute(sql)
+    conn.commit()
+    conn.close()
+    return None
+
+
+def db_get_all_id(id):
+    if id == "":
+        return None
+    conn = sqlite3.connect('memberTable.sqlite')
+    cur = conn.cursor()
+    sql = 'select * from memberTable where memberID = {} '.format(id)
+    cur.execute(sql)
+    member = cur.fetchone()
+    conn.close()
+    return member
 
 def db_search_id(id):
     conn = sqlite3.connect('memberTable.sqlite')
@@ -168,6 +198,47 @@ def delete_confirmed():
     message = db_delete_id(myvar)
     return render_template("finalised_delete.html",  msg=message)
 
+
+@app.route('/update_start', methods=['GET', 'POST'])
+def update_start():
+    if request.method == 'GET':
+        return render_template("update_start.html")
+    elif request.method == 'POST':
+            s = request.form["my_update_id"]
+            session['id'] = s
+            result = db_get_all_id(s)
+            if result is None:
+                result="No member with this ID has been found"
+                return render_template("update_start.html", result=result)
+            else:
+                result = db_get_all_id(s)
+                print(result)
+                myform = MainForm(csrf_enabled=False)
+                myform.firstname.data = result[1]
+                myform.lastname.data = result[2]
+                myform.address.data = result[3]
+                myform.suburb.data = result[4]
+                myform.postcode.data = result[5]
+                myform.phoneNumber.data = result[6]
+                myform.email.data = result[7]
+                myform.birthdate.data = string_to_date(result[8])
+                myform.gender.data = result[9]
+                myform.bio.data = result[10]
+                return render_template("update.html", form=myform)
+
+
+@app.route('/update' , methods=['POST'])
+def update():
+    myList=[]
+    myvar = session.get('id', None)
+    myList.append(myvar)
+    form = request.form
+    for x, y in form.items():
+        myList.append(y)
+        print("{} {}".format(x,y))
+    print(','.join(map(str,myList) ) )
+    db_update( myList[0],myList[1],myList[2],myList[3],myList[4],myList[5],myList[6],myList[7],myList[8],myList[9],myList[10])
+    return render_template("update_end.html",  form=form)
 
 
 if __name__ == '__main__':

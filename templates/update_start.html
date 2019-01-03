@@ -1,0 +1,19 @@
+{% extends "template.html" %}
+
+
+{% block title %}
+Delete Member using ID
+{% endblock %}
+
+{% block content %}
+<div class="container" >
+
+    <div style="background-color:#aaaaaa; overflow:hidden;">
+        {{ result }}
+<form style="float:right;" action='/update_start' method = 'POST'>
+<input type="text" name="my_update_id">
+    <input type="submit" name="Submit" value="Enter Member to Update" class="btn btn-primary"/>
+    </form>
+    </div>
+</div>
+{% endblock %}
